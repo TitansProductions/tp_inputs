@@ -6,6 +6,7 @@ let CONTAINS_ADVANCED_RANGE_SELECTOR = false;
 let ADVANCED_RANGE_SELECTOR_COST = 0;
 let ADVANCED_RANGE_SELECTOR_DESC = null;
 let ADVANCED_RANGE_SELECTOR_CURRENCY = null;
+let CONTAINS_ADVANCED_BUTTONS_SELECTOR = false;
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -40,6 +41,7 @@ function CloseDialog() {
   ADVANCED_RANGE_SELECTOR_COST = 0;
   ADVANCED_RANGE_SELECTOR_DESC = null;
   ADVANCED_RANGE_SELECTOR_CURRENCY = null;
+  CONTAINS_ADVANCED_BUTTONS_SELECTOR = false;
 
   $("#text_input").fadeOut();
   $("#text_input").val("");
@@ -55,6 +57,8 @@ function CloseDialog() {
 
   $("#range-selector-description-cost").text('');
   $("#range-selector-description-cost").fadeOut();
+
+  $("#buttons").html("");
 
 	$.post('http://tp_inputs/closeNUI', JSON.stringify({}));
 }
