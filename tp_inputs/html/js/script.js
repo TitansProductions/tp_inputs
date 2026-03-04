@@ -16,14 +16,26 @@ $(function () {
 
       var data = event.data.inputData;
 
+      $("#buttons").html("");
+      $("#buttons").hide();
+      $("#buttons-close-button").hide();
+
+      $("#text_input").show();
+      $("#left-action-button").show();
+      $("#right-action-button").show();
+
       $("#title").text(data.title);
-      $("#description").text(data.desc);
+
+      let desc = data.desc != null ? data.desc : "";
+      $("#description").text(desc);
 
       CONTAINS_TEXT_INPUT_PARAMETER = event.data.hasTextInput;
       CONTAINS_RETURNED_CLICKED_VALUES = event.data.returnClickedValue;
       CONTAINS_RETURNED_OPTION_VALUES = event.data.returnSelectedOptionValue;
       CONTAINS_RANGE_SELECTOR = event.data.returnSliderValue;
       CONTAINS_ADVANCED_RANGE_SELECTOR = event.data.returnAdvancedSliderValue;
+      CONTAINS_ADVANCED_BUTTONS_SELECTOR = event.data.returnAdvancedButtonSelection;
+
       ADVANCED_RANGE_SELECTOR_DESC = data.cost_description;
       ADVANCED_RANGE_SELECTOR_COST = data.cost;
       ADVANCED_RANGE_SELECTOR_CURRENCY = data.cost_currency;
@@ -36,7 +48,7 @@ $(function () {
       if (CONTAINS_RETURNED_OPTION_VALUES) {
         $("#options_select").fadeIn();
 
-        var options = data.options
+        var options = data.options;
         var x = document.getElementById("options_select");
 
         options.forEach((val) => {
@@ -46,6 +58,28 @@ $(function () {
 
         });
 
+      }
+
+      
+      if (CONTAINS_ADVANCED_BUTTONS_SELECTOR) {
+        $("#text_input").hide();
+        $("#left-action-button").hide();
+        $("#right-action-button").hide();
+
+        $("#buttons").show();
+        $("#buttons-close-button").show();
+
+        let buttons = data.buttons;
+
+        buttons.forEach(function(item) {
+          $("#buttons").append(
+            `<div id="buttons-list-main" action_type="${item.action_type}">
+                <div id="buttons-list-name">${item.label}</div>
+                <div id="buttons-list-description">${item.description}</div>
+             </div>
+             <div>&nbsp;</div>`
+          );
+        });
       }
 
       if (CONTAINS_RANGE_SELECTOR) {
@@ -116,6 +150,25 @@ $(function () {
   /*-----------------------------------------------------------
   General Action
   -----------------------------------------------------------*/
+
+  $("#tp_inputs").on("click", "#buttons-close-button", function (event) {
+    playAudio("button_click.wav");
+
+    $.post("http://tp_inputs/sendbuttonclickedinput", JSON.stringify({
+      input: "DECLINE",
+    }));
+  });
+
+  $("#tp_inputs").on("click", "#buttons-list-main", function (event) {
+    playAudio("button_click.wav");
+
+    let $button  = $(this);
+    let $action  = $button.attr('action_type');
+
+    $.post("http://tp_inputs/sendbuttonclickedinput", JSON.stringify({
+      input: $action,
+    }));
+  });
 
   $("#tp_inputs").on("click", "#left-action-button", function (event) {
     playAudio("button_click.wav");
