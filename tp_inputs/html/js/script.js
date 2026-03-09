@@ -19,8 +19,8 @@ $(function () {
       $("#buttons").html("");
       $("#buttons").hide();
       $("#buttons-close-button").hide();
-
-      $("#text_input").show();
+      
+      $("#text_input").hide();
       $("#left-action-button").show();
       $("#right-action-button").show();
 
@@ -42,7 +42,7 @@ $(function () {
 
       if (CONTAINS_TEXT_INPUT_PARAMETER) {
 
-        $("#text_input").fadeIn();
+        $("#text_input").show();
       }
 
       if (CONTAINS_RETURNED_OPTION_VALUES) {
@@ -215,6 +215,7 @@ $(function () {
 
 
 });
+
 
 
 
