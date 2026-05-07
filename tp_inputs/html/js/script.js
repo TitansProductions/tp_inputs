@@ -41,11 +41,11 @@ $(function () {
       ADVANCED_RANGE_SELECTOR_CURRENCY = data.cost_currency;
 
       if (CONTAINS_TEXT_INPUT_PARAMETER) {
-
         $("#text_input").show();
       }
 
       if (CONTAINS_RETURNED_OPTION_VALUES) {
+        $("#text_input").hide();
         $("#options_select").fadeIn();
 
         var options = data.options;
@@ -83,7 +83,7 @@ $(function () {
       }
 
       if (CONTAINS_RANGE_SELECTOR) {
-
+        $("#text_input").hide();
         $("#range-selector").attr("value", 1);
 
         $("#range-selector").attr("min", data.min);
