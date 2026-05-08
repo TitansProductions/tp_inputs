@@ -63,6 +63,8 @@ $(function () {
       
       if (CONTAINS_ADVANCED_BUTTONS_SELECTOR) {
         $("#text_input").hide();
+        $("#range-selector-description-cost").text("");
+        
         $("#left-action-button").hide();
         $("#right-action-button").hide();
 
