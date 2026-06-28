@@ -50,7 +50,28 @@ function GetInput(data, hasTextInput, returnClickedValue, returnSelectedOptionVa
         returnAdvancedSliderValue = returnAdvancedSliderValue,
         returnAdvancedButtonSelection = returnAdvancedButtonSelection,
     })
+    
+    Citizen.CreateThread(function()
+        
+        while not input do 
 
+            Wait(0)
+
+            DisableControlAction(0, 0x24978A28, true) -- HorseWhistleKey
+			DisableControlAction(0, 0xF3830D8E, true) -- WagonWhistleKey
+
+            DisableControlAction(0, 0xE6F612E4, true) -- 1
+            DisableControlAction(0, 0x1CE6D9EB, true) -- 2
+            DisableControlAction(0, 0x4F49CC4C, true) -- 3
+            DisableControlAction(0, 0x8F9F9E58, true) -- 4
+            DisableControlAction(0, 0xAB62E997, true) -- 5
+            DisableControlAction(0, 0xA1FDE2A6, true) -- 6
+            DisableControlAction(0, 0xB03A913B, true) -- 7
+            DisableControlAction(0, 0x42385422, true) -- 8
+        end
+    
+    end)
+    
     while not input do 
         Citizen.Wait(50) 
     end
